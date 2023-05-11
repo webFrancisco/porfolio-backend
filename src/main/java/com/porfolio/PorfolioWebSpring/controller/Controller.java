@@ -15,6 +15,7 @@ import com.porfolio.PorfolioWebSpring.service.IExperienciaService;
 import com.porfolio.PorfolioWebSpring.service.IPersonaService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/personas")
 public class Controller {
     @Autowired
@@ -44,12 +45,13 @@ public class Controller {
     }
 
     @PostMapping("/{id}/verificarpass")
-    public ResponseEntity<String> verifyPassword(@PathVariable Long id, @RequestBody Map<String, String> passwordMap) {
-        String password = passwordMap.get("password");
-        if (personaService.compararPass(id, password)) {
-            return ResponseEntity.ok("ok");
+    public ResponseEntity<PersonaDTO> verifyPassword(@PathVariable Long id, @RequestBody Map<String, String> reqMap) {
+        String password = reqMap.get("password");
+        String email = reqMap.get("email");
+        if (personaService.compararPass(id, email, password)) {
+            return ResponseEntity.ok(personaService.buscarPersona(id));
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("error");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
 
@@ -64,8 +66,8 @@ public class Controller {
         experienciaService.crearExperiencia(experiencia, id);
     }
 
-    @DeleteMapping("/delete/experiencia/{id}")
-    public void borrarexperiencia(@PathVariable Long id) {
-        experienciaService.borrarExperiencia(id);
+    @DeleteMapping("/{id}/experiencia/{id2}")
+    public void borrarexperiencia(@PathVariable Long id2) {
+        experienciaService.borrarExperiencia(id2);
     }
 }

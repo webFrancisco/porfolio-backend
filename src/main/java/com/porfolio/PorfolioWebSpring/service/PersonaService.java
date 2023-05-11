@@ -63,12 +63,12 @@ public class PersonaService implements IPersonaService {
     }
 
     @Override
-    public boolean compararPass(Long id, String pass) {
+    public boolean compararPass(Long id, String email, String pass) {
 
         Persona persona = persoRepo.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Persona not found with id: " + id));
 
-        return pass.equals(persona.getPassword());
+        return pass.equals(persona.getPassword()) && email.equals(persona.getEmail());
 
     }
 

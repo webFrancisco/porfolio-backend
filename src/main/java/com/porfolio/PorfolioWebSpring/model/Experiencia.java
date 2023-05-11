@@ -36,13 +36,12 @@ public class Experiencia {
   public Experiencia() {
   }
 
-  public Experiencia(Long id, String ocupacion, String lugarOcupacion, LocalDate fechaInicio, LocalDate fechaFin,
-      String descripcionOcupacion) {
-    this.id = id;
-    this.ocupacion = ocupacion;
-    this.lugarOcupacion = lugarOcupacion;
-    this.fechaInicio = fechaInicio;
-    this.fechaFin = fechaFin;
-    this.descripcionOcupacion = descripcionOcupacion;
-  }
+  public Experiencia(Long id, String ocupacion, String lugarOcupacion, LocalDate fechaInicio, LocalDate fechaFin, String descripcionOcupacion) {
+        this.id = id;
+        this.ocupacion = ocupacion;
+        this.lugarOcupacion = lugarOcupacion;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.descripcionOcupacion = descripcionOcupacion;
+    }
 }

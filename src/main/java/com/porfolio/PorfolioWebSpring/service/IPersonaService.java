@@ -6,8 +6,6 @@ import com.porfolio.PorfolioWebSpring.model.Persona;
 import com.porfolio.PorfolioWebSpring.model.PersonaDTO;
 
 public interface IPersonaService {
-    // public List<Persona> verPersonas();
-
     public PersonaDTO buscarPersona(Long id);
 
     public void crearPersona(Persona per);
@@ -16,6 +14,6 @@ public interface IPersonaService {
 
     public void borrarPersona(Long id);
 
-    public boolean compararPass(Long id, String pass);
+    public boolean compararPass(Long id, String email, String pass);
 
 }
