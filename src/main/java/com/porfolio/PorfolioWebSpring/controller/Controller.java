@@ -1,12 +1,16 @@
 package com.porfolio.PorfolioWebSpring.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.porfolio.PorfolioWebSpring.model.Experiencia;
 import com.porfolio.PorfolioWebSpring.model.Persona;
+import com.porfolio.PorfolioWebSpring.model.PersonaDTO;
 import com.porfolio.PorfolioWebSpring.service.IExperienciaService;
 import com.porfolio.PorfolioWebSpring.service.IPersonaService;
 
@@ -19,14 +23,9 @@ public class Controller {
     @Autowired
     private IExperienciaService experienciaService;
 
-    @GetMapping("/hola")
-    public String decirHola() {
-        return "Hola";
-    }
-
-    @GetMapping
-    public List<Persona> listaPersonas() {
-        return personaService.verPersonas();
+    @GetMapping("/{id}")
+    public PersonaDTO buscarPersona(@PathVariable Long id) {
+        return personaService.buscarPersona(id);
     }
 
     @PostMapping
@@ -34,9 +33,9 @@ public class Controller {
         personaService.crearPersona(persona);
     }
 
-    @GetMapping("/{id}")
-    public Persona buscarPersona(@PathVariable Long id) {
-        return personaService.buscarPersona(id);
+    @PutMapping("/{id}")
+    public void actualizarPersona(@PathVariable Long id, @RequestBody Persona persona) {
+        personaService.actualizarPersona(id, persona);
     }
 
     @DeleteMapping("/{id}")
@@ -44,6 +43,17 @@ public class Controller {
         personaService.borrarPersona(id);
     }
 
+    @PostMapping("/{id}/verificarpass")
+    public ResponseEntity<String> verifyPassword(@PathVariable Long id, @RequestBody Map<String, String> passwordMap) {
+        String password = passwordMap.get("password");
+        if (personaService.compararPass(id, password)) {
+            return ResponseEntity.ok("ok");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("error");
+        }
+    }
+
+    // --- EXPERIENCIAS ---
     @GetMapping("/{id}/experiencias")
     public List<Experiencia> verexperiencias(@PathVariable Long id) {
         return experienciaService.verExperiencias(id);

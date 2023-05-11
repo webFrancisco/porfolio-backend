@@ -19,6 +19,8 @@ public class Persona {
     private Long id;
     private String nombre;
     private String apellido;
+    private String email;
+    private String password;
     private String acercaDe;
     private String enlaceGithub;
     private String enlaceLinkedin;
@@ -31,11 +33,14 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(Long id, String nombre, String apellido, String acercaDe, String enlaceGithub, String enlaceLinkedin,
+    public Persona(Long id, String nombre, String apellido, String email, String password, String acercaDe,
+            String enlaceGithub, String enlaceLinkedin,
             String titulo) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.email = email;
+        this.password = password;
         this.acercaDe = acercaDe;
         this.enlaceGithub = enlaceGithub;
         this.enlaceLinkedin = enlaceLinkedin;
