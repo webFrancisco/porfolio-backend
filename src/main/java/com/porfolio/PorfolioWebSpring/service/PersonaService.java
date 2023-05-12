@@ -1,7 +1,5 @@
 package com.porfolio.PorfolioWebSpring.service;
 
-// import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,31 +14,30 @@ public class PersonaService implements IPersonaService {
     @Autowired
     public PersonaRepository persoRepo;
 
-    // @Override
-    // public List<Persona> verPersonas() {
-    // return persoRepo.findAll();
-    // }
-
     @Override
     public void crearPersona(Persona per) {
         persoRepo.save(per);
     }
 
     @Override
-    public void actualizarPersona(Long id, Persona per) {
-        per.setId(id);
-        persoRepo.save(per);
+    public void actualizarPersona(Long id, PersonaDTO per) {
+        Persona persona = persoRepo.findById(id).orElse(null);
+
+        persona.setNombre(per.getNombre());
+        persona.setApellido(per.getApellido());
+        persona.setEmail(per.getEmail());
+        persona.setAcercaDe(per.getAcercaDe());
+        persona.setEnlaceGithub(per.getEnlaceGithub());
+        persona.setEnlaceLinkedin(per.getEnlaceLinkedin());
+        persona.setTitulo(per.getTitulo());
+
+        persoRepo.save(persona);
     }
 
     @Override
     public void borrarPersona(Long id) {
         persoRepo.deleteById(id);
     }
-
-    // @Override
-    // public Persona buscarPersona(Long id) {
-    // return persoRepo.findById(id).orElse(null);
-    // }
 
     @Override
     public PersonaDTO buscarPersona(Long id) {

@@ -24,6 +24,7 @@ public class Controller {
     @Autowired
     private IExperienciaService experienciaService;
 
+    // --- PERSONAS ---
     @GetMapping("/{id}")
     public PersonaDTO buscarPersona(@PathVariable Long id) {
         return personaService.buscarPersona(id);
@@ -35,7 +36,7 @@ public class Controller {
     }
 
     @PutMapping("/{id}")
-    public void actualizarPersona(@PathVariable Long id, @RequestBody Persona persona) {
+    public void actualizarPersona(@PathVariable Long id, @RequestBody PersonaDTO persona) {
         personaService.actualizarPersona(id, persona);
     }
 
@@ -44,6 +45,7 @@ public class Controller {
         personaService.borrarPersona(id);
     }
 
+    // --- VERIFICAR PASS ---
     @PostMapping("/{id}/verificarpass")
     public ResponseEntity<PersonaDTO> verifyPassword(@PathVariable Long id, @RequestBody Map<String, String> reqMap) {
         String password = reqMap.get("password");
@@ -64,6 +66,12 @@ public class Controller {
     @PostMapping("/{id}/experiencia")
     public void agregarExperiencia(@PathVariable Long id, @RequestBody Experiencia experiencia) {
         experienciaService.crearExperiencia(experiencia, id);
+    }
+
+    @PutMapping("/{idPer}/experiencia/{idExp}")
+    public void agregarExperiencia(@PathVariable Long idPer, @PathVariable Long idExp,
+            @RequestBody Experiencia experiencia) {
+        experienciaService.modificarExperiencia(experiencia, idPer, idExp);
     }
 
     @DeleteMapping("/{id}/experiencia/{id2}")

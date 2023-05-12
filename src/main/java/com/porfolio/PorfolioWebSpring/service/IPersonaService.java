@@ -10,7 +10,7 @@ public interface IPersonaService {
 
     public void crearPersona(Persona per);
 
-    public void actualizarPersona(Long id, Persona per);
+    public void actualizarPersona(Long id, PersonaDTO per);
 
     public void borrarPersona(Long id);
 

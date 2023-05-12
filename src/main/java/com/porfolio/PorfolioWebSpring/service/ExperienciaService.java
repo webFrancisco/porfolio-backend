@@ -38,6 +38,17 @@ public class ExperienciaService implements IExperienciaService {
   }
 
   @Override
+  public void modificarExperiencia(Experiencia experiencia, Long idPer, Long idExp) {
+
+    Persona persona = personaRepository.findById(idPer).orElse(null);
+
+    experiencia.setPersona(persona);
+    experiencia.setId(idExp);
+
+    experienciaRepository.save(experiencia);
+  }
+
+  @Override
   public void borrarExperiencia(Long id) {
     experienciaRepository.deleteById(id);
   }
