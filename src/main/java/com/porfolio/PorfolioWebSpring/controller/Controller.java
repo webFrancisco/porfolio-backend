@@ -21,7 +21,7 @@ import com.porfolio.PorfolioWebSpring.service.IPersonaService;
 import com.porfolio.PorfolioWebSpring.service.IProyectoService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
 @RequestMapping("/personas")
 public class Controller {
     @Autowired
