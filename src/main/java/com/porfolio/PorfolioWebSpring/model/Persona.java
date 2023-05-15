@@ -38,6 +38,10 @@ public class Persona {
     @JsonIgnore
     private List<Habilidades> habilidades = new ArrayList<>();
 
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Proyecto> proyectos = new ArrayList<>();
+
     public Persona() {
     }
 

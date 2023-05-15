@@ -13,10 +13,12 @@ import com.porfolio.PorfolioWebSpring.model.Formacion;
 import com.porfolio.PorfolioWebSpring.model.Habilidades;
 import com.porfolio.PorfolioWebSpring.model.Persona;
 import com.porfolio.PorfolioWebSpring.model.PersonaDTO;
+import com.porfolio.PorfolioWebSpring.model.Proyecto;
 import com.porfolio.PorfolioWebSpring.service.IExperienciaService;
 import com.porfolio.PorfolioWebSpring.service.IFormacionService;
 import com.porfolio.PorfolioWebSpring.service.IHabilidadesService;
 import com.porfolio.PorfolioWebSpring.service.IPersonaService;
+import com.porfolio.PorfolioWebSpring.service.IProyectoService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -33,6 +35,9 @@ public class Controller {
 
     @Autowired
     private IHabilidadesService habilidadesService;
+
+    @Autowired
+    private IProyectoService proyectoService;
 
     // --- PERSONAS ---
     @GetMapping("/{id}")
@@ -131,5 +136,27 @@ public class Controller {
     @DeleteMapping("/{id}/habilidad/{id2}")
     public void borrarHabilidad(@PathVariable Long id2) {
         habilidadesService.borrarHabilidad(id2);
+    }
+
+    // --- PROYECTOS ---
+    @GetMapping("/{id}/proyectos")
+    public List<Proyecto> verproyectos(@PathVariable Long id) {
+        return proyectoService.verProyectos(id);
+    }
+
+    @PostMapping("/{id}/proyecto")
+    public void agregarProyecto(@PathVariable Long id, @RequestBody Proyecto proyecto) {
+        proyectoService.crearProyecto(proyecto, id);
+    }
+
+    @PutMapping("/{idPer}/proyecto/{idPro}")
+    public void agregarProyecto(@PathVariable Long idPer, @PathVariable Long idPro,
+            @RequestBody Proyecto proyecto) {
+        proyectoService.modificarProyecto(proyecto, idPer, idPro);
+    }
+
+    @DeleteMapping("/{id}/proyecto/{id2}")
+    public void borrarproyecto(@PathVariable Long id2) {
+        proyectoService.borrarProyecto(id2);
     }
 }
