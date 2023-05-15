@@ -9,9 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.porfolio.PorfolioWebSpring.model.Experiencia;
+import com.porfolio.PorfolioWebSpring.model.Formacion;
+import com.porfolio.PorfolioWebSpring.model.Habilidades;
 import com.porfolio.PorfolioWebSpring.model.Persona;
 import com.porfolio.PorfolioWebSpring.model.PersonaDTO;
 import com.porfolio.PorfolioWebSpring.service.IExperienciaService;
+import com.porfolio.PorfolioWebSpring.service.IFormacionService;
+import com.porfolio.PorfolioWebSpring.service.IHabilidadesService;
 import com.porfolio.PorfolioWebSpring.service.IPersonaService;
 
 @RestController
@@ -23,6 +27,12 @@ public class Controller {
 
     @Autowired
     private IExperienciaService experienciaService;
+
+    @Autowired
+    private IFormacionService formacionService;
+
+    @Autowired
+    private IHabilidadesService habilidadesService;
 
     // --- PERSONAS ---
     @GetMapping("/{id}")
@@ -77,5 +87,49 @@ public class Controller {
     @DeleteMapping("/{id}/experiencia/{id2}")
     public void borrarexperiencia(@PathVariable Long id2) {
         experienciaService.borrarExperiencia(id2);
+    }
+
+    // --- FORMACION ---
+    @GetMapping("/{id}/formaciones")
+    public List<Formacion> verFormaciones(@PathVariable Long id) {
+        return formacionService.verFormaciones(id);
+    }
+
+    @PostMapping("/{id}/formacion")
+    public void agregarFormacion(@PathVariable Long id, @RequestBody Formacion formacion) {
+        formacionService.crearFormacion(formacion, id);
+    }
+
+    @PutMapping("/{idPer}/formacion/{idForm}")
+    public void agregarFormacion(@PathVariable Long idPer, @PathVariable Long idForm,
+            @RequestBody Formacion formacion) {
+        formacionService.modificarFormacion(formacion, idPer, idForm);
+    }
+
+    @DeleteMapping("/{id}/formacion/{id2}")
+    public void borrarFormacion(@PathVariable Long id2) {
+        formacionService.borrarFormacion(id2);
+    }
+
+    // --- HABILIDADES ---
+    @GetMapping("/{id}/habilidades")
+    public List<Habilidades> verHabilidades(@PathVariable Long id) {
+        return habilidadesService.verHabilidades(id);
+    }
+
+    @PostMapping("/{id}/habilidad")
+    public void agregarHabilidad(@PathVariable Long id, @RequestBody Habilidades habilidad) {
+        habilidadesService.crearHabilidad(habilidad, id);
+    }
+
+    @PutMapping("/{idPer}/habilidad/{idForm}")
+    public void agregarHabilidad(@PathVariable Long idPer, @PathVariable Long idForm,
+            @RequestBody Habilidades habilidad) {
+        habilidadesService.modificarHabilidad(habilidad, idPer, idForm);
+    }
+
+    @DeleteMapping("/{id}/habilidad/{id2}")
+    public void borrarHabilidad(@PathVariable Long id2) {
+        habilidadesService.borrarHabilidad(id2);
     }
 }

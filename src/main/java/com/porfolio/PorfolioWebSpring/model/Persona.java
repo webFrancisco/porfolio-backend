@@ -30,6 +30,14 @@ public class Persona {
     @JsonIgnore
     private List<Experiencia> experiencias = new ArrayList<>();
 
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Formacion> formacion = new ArrayList<>();
+
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Habilidades> habilidades = new ArrayList<>();
+
     public Persona() {
     }
 

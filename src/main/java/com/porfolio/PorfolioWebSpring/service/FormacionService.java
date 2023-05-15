@@ -20,7 +20,7 @@ public class FormacionService implements IFormacionService {
   private PersonaRepository personaRepository;
 
   @Override
-  public List<Formacion> verFormacions(Long id) {
+  public List<Formacion> verFormaciones(Long id) {
 
     Persona persona = personaRepository.findById(id).orElse(null);
 
@@ -33,6 +33,17 @@ public class FormacionService implements IFormacionService {
     Persona persona = personaRepository.findById(id).orElse(null);
 
     formacion.setPersona(persona);
+
+    formacionRepository.save(formacion);
+  }
+
+  @Override
+  public void modificarFormacion(Formacion formacion, Long idPer, Long idForm) {
+
+    Persona persona = personaRepository.findById(idPer).orElse(null);
+
+    formacion.setPersona(persona);
+    formacion.setId(idForm);
 
     formacionRepository.save(formacion);
   }
